@@ -1,0 +1,98 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+//noinspection CssUnknownTarget
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #666;
+}
+
+.marsGrid {
+  color: violet;
+  font-size: 1.3em;
+  font-weight: bold;
+  max-height: 24em;
+  overflow: scroll;
+}
+
+.marsRow {
+  overflow: auto;
+  zoom: 1;
+}
+
+.marsTile {
+  display: block;
+  float: left;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  border: 1px solid #ddd;
+  border-right: none;
+  border-bottom: none;
+  text-align: center;
+
+  &.lastTileR {
+    border-right: 1px solid #ddd;
+  }
+  &.lastTileB {
+    border-bottom: 1px solid #ddd;
+  }
+  &.safeN {
+    border-top: 1px solid rgb(20, 201, 20);
+  }
+  &.safeE {
+    border-right: 1px solid rgb(20, 201, 20);
+  }
+  &.safeS {
+    border-bottom: 1px solid rgb(20, 201, 20);
+  }
+  &.safeW {
+    border-left: 1px solid rgb(20, 201, 20);
+  }
+}
+
+.marsRobot {
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  transition: all 0.2s ease-in-out;
+
+  &.lookN {
+    transform: rotate(0deg);
+  }
+  &.lookE {
+    transform: rotate(90deg);
+  }
+  &.lookS {
+    transform: rotate(180deg);
+  }
+  &.lookW {
+    transform: rotate(-90deg);
+  }
+
+  img {
+    max-width: 1em;
+    max-height: 1em;
+  }
+}
+
+.sequenceOutput {
+  padding: 1em;
+  font-size: 0.6em;
+  line-height: 0.6em;
+  background: #222;
+  color: #baff40;
+  height: 16em;
+  overflow: auto;
+}
