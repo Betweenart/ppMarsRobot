@@ -15,6 +15,7 @@ angular.module('robotsOnMarsApp')
       mars = {};
 
     // main flags
+    mars.initialized = false;
     mars.gridSet = false;
     mars.gridSize = null;
     mars.robotScents = [];
@@ -31,6 +32,7 @@ angular.module('robotsOnMarsApp')
     mars.init = function (planetId) {
       mars.setPlanet(planetId);
       mars.setRobot();
+      mars.initialized = true;
     };
 
     /**
