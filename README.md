@@ -1,6 +1,6 @@
 # Robots On Mars test
 
-version 1.0.3.
+version 1.0.4
 
 ## Build & development
 
