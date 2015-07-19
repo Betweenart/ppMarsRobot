@@ -1,0 +1,19 @@
+.slide-animation.ng-hide-add-active,
+.slide-animation.ng-hide-remove-active,
+.slide-animation.ng-hide-add.ng-hide-add-active,
+.slide-animation.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: all linear 0.3s;
+  transition: all linear 0.3s;
+}
+
+.slide-animation {
+  line-height: inherit;
+  height: auto;
+  opacity: 1;
+}
+.slide-animation.ng-hide {
+  line-height: 0;
+  height: 0;
+  padding: 0;
+  opacity: 0;
+}

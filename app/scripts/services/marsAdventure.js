@@ -71,8 +71,8 @@ angular.module('robotsOnMarsApp')
      *  @method buildSurface
      */
     mars.buildSurface = function (size) {
-      console.log($scope.surfaceSize);
-      size = size || $('#surfaceSize').val();
+      var sizeInput = $('#surfaceSize');
+      size = size || sizeInput.val();
       if (!size || size === '') {
         return;
       }
@@ -98,7 +98,7 @@ angular.module('robotsOnMarsApp')
       }
 
       // clear input
-      $('#surfaceSize').val('');
+      sizeInput.val('');
 
       // split sizes
       var sizeArray = size.split(',');
@@ -115,6 +115,7 @@ angular.module('robotsOnMarsApp')
       for (var i = 0; i < mars.height; i++) {
         var row = d.createElement('div');
         $(row).addClass('marsRow');
+        $(row).css('width', (mars.width * 2) + 'em');
 
         for (var j = 0; j < mars.width; j++) {
           var tile = d.createElement('div');
@@ -137,7 +138,8 @@ angular.module('robotsOnMarsApp')
      *  @method placeRobot
      */
     mars.placeRobot = function (position) {
-      position = position || $('#robotPosition').val();
+      var positionInput = $('#robotPosition');
+      position = position || positionInput.val();
       if (!position || position === '') {
         return;
       }
@@ -165,7 +167,7 @@ angular.module('robotsOnMarsApp')
       }
 
       // clear input
-      $('#robotPosition').val('');
+      positionInput.val('');
 
       // slit into x & y
       var posArray = position.split(','),
@@ -208,7 +210,8 @@ angular.module('robotsOnMarsApp')
      *  @method moveRobot
      */
     mars.moveRobot = function (sequence) {
-      sequence = sequence || $('#moveSequence').val();
+      var sequenceInput = $('#moveSequence');
+      sequence = sequence || sequenceInput.val();
       if (!sequence || sequence === '') {
         return;
       }
@@ -230,7 +233,7 @@ angular.module('robotsOnMarsApp')
       }
 
       // clear input
-      $('#moveSequence').val('');
+      sequenceInput.val('');
 
       var i, moveResult = 'OK',
         moves = sequence.split(''),
