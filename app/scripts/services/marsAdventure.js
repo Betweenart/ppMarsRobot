@@ -25,13 +25,31 @@ angular.module('robotsOnMarsApp')
     mars.currentDirection = 'N';
     mars.currentTile = null;
     mars.wrap = null;
+    mars.output = [];
+    mars.gridSizeInput = $('#surfaceSize');
+    mars.robotPositionInput = $('#robotPosition');
+    mars.sequenceInput = $('#moveSequence');
+    mars.robotIconDefault = 'images/robot-icon.png';
+    mars.robotIcon = null;
 
     /**
+     *  Sets the initial grid wrap and robot elemment
      *  @method init
+     *  @param {Object} options
      */
-    mars.init = function (planetId) {
-      mars.setPlanet(planetId);
+    mars.init = function (options) {
+      if (!options) {
+        throw new Error('Missing options');
+      }
+
+      if (!options.gridId || typeof options.gridId !== 'string') {
+        throw new Error('Options missing gridId string');
+      }
+      mars.wrap = $('#' + options.gridId);
+
+      mars.robotIcon = options.robotIcon || mars.robotIconDefault;
       mars.setRobot();
+
       mars.initialized = true;
     };
 
@@ -48,13 +66,7 @@ angular.module('robotsOnMarsApp')
       mars.currentDirection = 'N';
       mars.currentTile = null;
       mars.wrap.empty();
-    };
-
-    /**
-     *  @method setPlanet
-     */
-    mars.setPlanet = function (id) {
-      mars.wrap = $('#' + id);
+      mars.output = [];
     };
 
     /**
@@ -63,16 +75,15 @@ angular.module('robotsOnMarsApp')
     mars.setRobot = function () {
       mars.robot = d.createElement('div');
       mars.robot.setAttribute('class', 'marsRobot');
-      mars.robotIcon = '<img src="images/robot-icon.png">';
-      mars.robot.innerHTML = mars.robotIcon;
+      mars.robot.innerHTML = '<img src="' + mars.robotIcon + '">';
     };
 
     /**
      *  @method buildSurface
+     *  @param {String} size
      */
     mars.buildSurface = function (size) {
-      var sizeInput = $('#surfaceSize');
-      size = size || sizeInput.val();
+      size = size || mars.gridSizeInput.val();
       if (!size || size === '') {
         return;
       }
@@ -98,7 +109,7 @@ angular.module('robotsOnMarsApp')
       }
 
       // clear input
-      sizeInput.val('');
+      mars.gridSizeInput.val('');
 
       // split sizes
       var sizeArray = size.split(',');
@@ -136,10 +147,10 @@ angular.module('robotsOnMarsApp')
 
     /**
      *  @method placeRobot
+     *  @param {String} position
      */
     mars.placeRobot = function (position) {
-      var positionInput = $('#robotPosition');
-      position = position || positionInput.val();
+      position = position || mars.robotPositionInput.val();
       if (!position || position === '') {
         return;
       }
@@ -167,7 +178,7 @@ angular.module('robotsOnMarsApp')
       }
 
       // clear input
-      positionInput.val('');
+      mars.robotPositionInput.val('');
 
       // slit into x & y
       var posArray = position.split(','),
@@ -190,6 +201,9 @@ angular.module('robotsOnMarsApp')
 
     /**
      *  @method getTile
+     *  @param {Number} x
+     *  @param {Number} y
+     *  @returns {Object} tile
      */
     mars.getTile = function (x, y) {
       var tile = mars.wrap.find('.marsRow:nth-child(' + (mars.height - y) + ') .marsTile:nth-child(' + (x + 1) + ')');
@@ -208,15 +222,15 @@ angular.module('robotsOnMarsApp')
 
     /**
      *  @method moveRobot
+     *  @param {String} sequence
      */
     mars.moveRobot = function (sequence) {
-      var sequenceInput = $('#moveSequence');
-      sequence = sequence || sequenceInput.val();
+      sequence = sequence || mars.sequenceInput.val();
       if (!sequence || sequence === '') {
         return;
       }
 
-      // chek if there is a robot
+      // check if there is a robot
       if (!mars.robotOnGrid) {
         $window.alert('No robot on Mars yet? Place it ^^');
         return;
@@ -233,7 +247,7 @@ angular.module('robotsOnMarsApp')
       }
 
       // clear input
-      sequenceInput.val('');
+      mars.sequenceInput.val('');
 
       var i, moveResult = 'OK',
         moves = sequence.split(''),
@@ -445,11 +459,11 @@ angular.module('robotsOnMarsApp')
 
     /**
      *  @method outputResult
+     *  @param {String} message
      */
     mars.outputResult = function (message) {
-      message = message || '';
-
-      $('#sequenceOutput').append('<p>' + mars.getCurrentLocation() + ' ' + message + '</p>');
+      message = message ? ' ' + message : '';
+      mars.output.push(mars.getCurrentLocation() + message);
     };
 
     // return constructed mars

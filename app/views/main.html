@@ -35,7 +35,7 @@
       <span ng-show="mars.gridSet">Grid Size: {{mars.gridSize}}.</span>
 
       <span ng-hide="mars.robotOnGrid">No robot placed.</span>
-      <span ng-show="mars.robotOnGrid">Robot position: {{mars.currentPositionX}}, {{mars.currentPositionY}} {{mars.currentDirection}}.</span>
+      <span ng-show="mars.robotOnGrid">Robot position: {{mars.currentPositionX}},{{mars.currentPositionY}} {{mars.currentDirection}}.</span>
     </p>
 
     <div id="mars" class="marsGrid"></div>
@@ -45,9 +45,11 @@
     <div ng-show="mars.robotOnGrid" class="slide-animation">
       <h3>Sequence Results</h3>
 
-      <p>position afer each completed sequence</p>
+      <p>position after each completed sequence</p>
 
-      <div id="sequenceOutput" class="sequenceOutput"></div>
+      <div class="sequenceOutput">
+        <p ng-repeat="position in mars.output">{{position}}</p>
+      </div>
     </div>
   </div>
 </div>

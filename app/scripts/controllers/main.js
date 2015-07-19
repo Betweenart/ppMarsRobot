@@ -11,5 +11,5 @@ angular.module('robotsOnMarsApp')
   .controller('MainCtrl', function ($scope, marsAdventure) {
     // start having fun...
     $scope.mars = marsAdventure;
-    marsAdventure.init('mars');
+    marsAdventure.init({gridId: 'mars'});
   });
