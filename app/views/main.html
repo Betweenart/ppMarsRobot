@@ -48,7 +48,7 @@
       <p>position after each completed sequence</p>
 
       <div class="sequenceOutput">
-        <p ng-repeat="position in mars.output">{{position}}</p>
+        <p ng-repeat="position in mars.output track by $index">{{position}}</p>
       </div>
     </div>
   </div>
