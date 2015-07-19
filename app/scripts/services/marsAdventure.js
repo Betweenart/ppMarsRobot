@@ -71,6 +71,7 @@ angular.module('robotsOnMarsApp')
      *  @method buildSurface
      */
     mars.buildSurface = function (size) {
+      console.log($scope.surfaceSize);
       size = size || $('#surfaceSize').val();
       if (!size || size === '') {
         return;
